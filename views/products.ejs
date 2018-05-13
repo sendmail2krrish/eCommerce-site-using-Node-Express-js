@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title><%= siteTitle+' | '+title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <% include include/header.ejs %>
+
+  <div class="jumbotron text-center">
+    <h1>My First Bootstrap Page</h1>
+    <p>Resize this responsive page to see the effect!</p> 
+  </div>
+    
+  <div class="container">
+    <h2>Products list</h2>
+    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+    <div class="row">
+    <% products.forEach(function(product){ %>
+      <div class="col-md-3">
+        <div class="card rounded-0" style="margin-bottom: 20px;">
+          <div class="card-body">
+            <small><%= product.name %></small>
+            <h4 class="card-title"><%= product.title %></h4>
+            <p class="card-text">Price: <%= product.price %></p>
+            <p class="card-text"><%= product.details.substring(0, 100)+' ...' %></p>
+            <a href="/add-to-cart/<%= product.pid %>" class="card-link"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</a>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="reload/reload.js"></script>
+</body>
+</html>
