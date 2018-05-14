@@ -7,6 +7,10 @@ var express = require('express');
  */
 var session = require('express-session');
 /**
+ * Cookie object declear
+ */
+var cookieParser = require('cookie-parser');
+/**
  * Create app object & assign express object.
  */
 var app = express();
@@ -23,6 +27,10 @@ app.set('port', process.env.POST || 7000);
  */
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+/**
+ * Register cookie
+ */
+app.use(cookieParser());
 /**
  * Register session with secret key
  */

@@ -1,0 +1,21 @@
+<div class="card rounded-0" style="margin-bottom: 20px;">
+  <div class="card-body">
+    <% if(title === 'Shop'){ %>
+      <a class="text-body" href="/product/<%= product.pid %>">
+        <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/<%= product.picture %>" />
+        <h4 class="card-title"><%= product.title %></h4>
+      </a>
+    <% } else {%>
+      <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/<%= product.picture %>" />
+      <h4 class="card-title"><%= product.title %></h4>
+    <% } %>
+    <span class="badge badge-warning"><%= product.name %></span>
+    <p class="card-text">Price: <%= product.price %></p>
+    <% if(title === 'Shop'){ %>
+      <p class="card-text"><%= product.details.substring(0, 100)+' ...' %></p>
+    <% } else {%>
+      <p class="card-text"><%= product.details %></p>
+    <% } %>
+    <a href="/add-to-cart/<%= product.pid %>" class="card-link"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</a>
+  </div>
+</div>
