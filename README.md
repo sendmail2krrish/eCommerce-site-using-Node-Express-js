@@ -2,8 +2,8 @@
 
 1. Bootstrap 4 design - Done
 2. Product listing - Done
-3. Add to cart - Working...
-4. Product details
-5. Cart page
-6. Update cart
+3. Add to cart - Done
+4. Product details - Done
+5. Cart page - Done
+6. Update cart - Working...
 7. Checkout page.
