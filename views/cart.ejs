@@ -36,9 +36,9 @@
           <tbody>
           <% products.forEach(function(product, index) { %>
             <tr>
-              <td><img style="max-width: 100px; max-height: 50px;" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/<%= product.picture %>" /></td>
-              <td><%= product.title %><br><span class="badge badge-warning"><%= product.name %></span></td>
-              <td><%= product.price %></td>
+              <td><a class="text-body" href="/product/<%= product.pid %>"><img style="max-width: 100px; max-height: 50px;" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/<%= product.picture %>" /></a></td>
+              <td><a class="text-body" href="/product/<%= product.pid %>"><%= product.title %></a><br><span class="badge badge-warning"><%= product.name %></span></td>
+              <td>₹<%= product.price %></td>
               <td><input type="number" style="width: 70px;" min="1" name="qnt[]" value="<%= product.qnt %>"/></td>
               <td><a href="/remove-from-cart/pid-<%= index %>">Delete</a></td>
             </tr>

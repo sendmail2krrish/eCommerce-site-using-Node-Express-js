@@ -10,7 +10,7 @@
       <h4 class="card-title"><%= product.title %></h4>
     <% } %>
     <span class="badge badge-warning"><%= product.name %></span>
-    <p class="card-text">Price: <%= product.price %></p>
+    <p class="card-text">Price: ₹<%= product.price %></p>
     <% if(title === 'Shop'){ %>
       <p class="card-text"><%= product.details.substring(0, 100)+' ...' %></p>
     <% } else {%>
