@@ -8,48 +8,53 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="https://via.placeholder.com/16/007bff/007bff" type="image/x-icon">
 </head>
 <body>
   <% include include/header.ejs %>
 
   <div class="jumbotron text-center">
-    <h1>My First Bootstrap Page</h1>
+    <h1>Cart</h1>
     <p>Resize this responsive page to see the effect!</p> 
   </div>
     
   <div class="container">
-  <% if(products.length > 0) { %>
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-        <% products.forEach(function(product){ %>
-          <tr>
-            <td><img style="max-width: 100px; max-height: 50px;" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/<%= product.picture %>" /></td>
-            <td><%= product.title %><br><span class="badge badge-warning"><%= product.name %></span></td>
-            <td><%= product.price %></td>
-            <td><input /></td>
-            <td><a href="">Delete</a></td>
-          </tr>
-        <% }); %>
-        </tbody>
-      </table>
-    </div>
-    <div class="clearfix"></div>
-    <a href="/clear-cart" class="btn btn-link float-left text-secondary">Clear cart</a>
-    <a href="/checkout" class="btn btn-primary float-right">Checkout</a>
-    <div class="clearfix"></div>
-  <% } else { %>
-    <p>Your cart is empty. <a href="/shop">Continue shopping</a> </p>
-  <% } %>
+    <form method="POST" action="/update-cart">
+    <% if(products.length > 0) { %>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% products.forEach(function(product, index) { %>
+            <tr>
+              <td><img style="max-width: 100px; max-height: 50px;" src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/<%= product.picture %>" /></td>
+              <td><%= product.title %><br><span class="badge badge-warning"><%= product.name %></span></td>
+              <td><%= product.price %></td>
+              <td><input type="number" style="width: 70px;" min="1" name="qnt[]" value="<%= product.qnt %>"/></td>
+              <td><a href="/remove-from-cart/pid-<%= index %>">Delete</a></td>
+            </tr>
+          <% }); %>
+          </tbody>
+        </table>
+      </div>
+      <div class="clearfix"></div>
+      <a href="/empty-cart" class="btn btn-danger float-left">Clear cart</a>
+      <a href="/checkout" class="btn btn-primary float-right">Checkout</a>
+      <button class="btn btn-success float-right" style="margin-right: 10px;">Update</button>
+      <div class="clearfix"></div>
+    <% } else { %>
+      <p>Your cart is empty. <a href="/shop">Continue shopping</a> </p>
+    <% } %>
+    </form>
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

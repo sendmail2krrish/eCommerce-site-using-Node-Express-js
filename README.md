@@ -5,5 +5,6 @@
 3. Add to cart - Done
 4. Product details - Done
 5. Cart page - Done
-6. Update cart - Working...
-7. Checkout page.
+6. Update cart - Done
+7. Remove from cart - Done
+8. Checkout page - Working...

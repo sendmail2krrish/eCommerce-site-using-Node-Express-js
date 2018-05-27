@@ -1,14 +1,14 @@
-var express = require('express');
-var session = require('express-session');
-var route = express.Router();
-var db = require('../database/config');
+let express = require('express');
+let session = require('express-session');
+let route = express.Router();
+let db = require('../database/config');
 
 route.get('/', function(req, res) {
-  res.render('home', {title: 'Home', product: 'ID: '+req.session.product});
+  res.render('home', {title: 'Home'});
 });
 
 route.get('/shop', function(req, res) {
-  var products;
+  let products;
   db.query("SELECT * FROM products left join categories on categories.id=products.category", function (err, result, fields) {
     if (err) {
       throw err;
@@ -20,7 +20,7 @@ route.get('/shop', function(req, res) {
 });
 
 route.get('/product/:product', function(req, res) {
-  var products;
+  let products;
   db.query("SELECT * FROM products left join categories on categories.id=products.category where pid='"+req.params.product+"'", function (err, result, fields) {
     if (err) {
       throw err;
@@ -44,8 +44,10 @@ route.get('/add-to-cart/:product', function(req, res) {
   });*/
   //res.send('<h1>'+JSON.stringify(req.session.product)+'</h1>');
 
+  let product = req.params.product.split("-")[1];
+  //console.log(product)
   //Cart through cookie
-  var products = [];
+  let products = [];
   if(req.cookies.node_express_ecommerce) {
     products = req.cookies.node_express_ecommerce;
   }
@@ -53,42 +55,58 @@ route.get('/add-to-cart/:product', function(req, res) {
     id: req.params.product,
     qnt: 1
   });*/
-  db.query("SELECT * FROM products left join categories on categories.id=products.category where pid='"+req.params.product+"'", function (err, result, fields) {
+  db.query("SELECT * FROM products left join categories on categories.id=products.category where pid='"+product+"'", function (err, result, fields) {
     if (err) {
       console.log(err)
+      res.render('page', {title: 'About'});
     } else {
-      //console.log(result);
-      products.push({
-        pid: result[0].pid,
-        title: result[0].title,
-        name: result[0].name,
-        price: result[0].price,
-        picture: result[0].picture,
-        qnt: 1
+      let flag = 0;
+      products.forEach(item => {
+        if(item.pid == product) {
+          flag = 1;
+        }
       });
+      //console.log(result);
+      if(flag == 0) {
+        products.push({
+          pid: result[0].pid,
+          title: result[0].title,
+          name: result[0].name,
+          price: result[0].price,
+          picture: result[0].picture,
+          qnt: 1
+        });
+      }
 
       //res.send(products);
-      res.cookie('node_express_ecommerce', products);
-      res.writeHead(301, { "Location": "http://" + req.headers['host'] + '/cart' });
-      return res.end();
+      res.cookie('node_express_ecommerce', products, {path:'/'});
+      res.redirect('/cart');
     }
   });
-  //console.log(products);
-  //res.cookie('node_express_ecommerce', products);
-  //res.writeHead(301, { "Location": "http://" + req.headers['host'] + '/cart' });
-  //return res.end();
 });
 
-route.get('/clear-cart', function(req, res) {
-  //res.cookie('node_express_ecommerce', '');
-  res.clearCookie('node_express_ecommerce');
-  res.writeHead(301, { "Location": "http://" + req.headers['host'] + '/cart' });
-  return res.end();
+route.get('/remove-from-cart/:index', function(req, res) {
+  let products = req.cookies.node_express_ecommerce;
+  let index = req.params.index.split("-")[1];
+  products.splice(index, 1);
+  res.cookie('node_express_ecommerce', products, {path:'/'});
+  
+  res.redirect('/cart');
+});
+
+route.get('/empty-cart', function(req, res) {
+  let products = [];
+  res.cookie('node_express_ecommerce', products, {path:'/'});
+  //req.session.destroy();
+  //res.clearCookie('node_express_ecommerce', {path:'/'});
+  //console.log(req.cookies.node_express_ecommerce);
+  
+  res.redirect('/cart');
 });
 
 route.get('/cart', function(req, res) {
-  var products = [];
-  //var session_products = [];
+  let products = [];
+  //let session_products = [];
 
   //Using cookies
   //console.log(req.cookies.node_express_ecommerce);
@@ -115,6 +133,23 @@ route.get('/cart', function(req, res) {
   } else {
     res.render('cart', {title: 'Cart', products: products});
   }*/
+});
+
+route.post('/update-cart', function(req, res) {
+  //console.log(req.cookies.node_express_ecommerce);
+  let products = req.cookies.node_express_ecommerce;
+  products.forEach(function(product, index) {
+    product.qnt = req.body.qnt[index];
+  });
+  //console.log(req.body)
+  res.clearCookie('node_express_ecommerce', {path:'/'});
+  res.cookie('node_express_ecommerce', products);
+  res.redirect('/cart');
+});
+
+route.get('/checkout', function(req, res) {
+  //res.send('<h1>About page</h1>');
+  res.render('order', {title: 'Checkout'});
 });
 
 route.get('/about', function(req, res) {

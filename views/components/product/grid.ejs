@@ -16,6 +16,6 @@
     <% } else {%>
       <p class="card-text"><%= product.details %></p>
     <% } %>
-    <a href="/add-to-cart/<%= product.pid %>" class="card-link"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</a>
+    <a href="/add-to-cart/pid-<%= product.pid %>" class="card-link"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</a>
   </div>
 </div>

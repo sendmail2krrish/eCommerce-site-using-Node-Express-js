@@ -36,6 +36,12 @@ app.use(cookieParser());
  */
 app.use(session({secret: 'kak'}));
 /**
+ * Add & register body parser
+ */
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+/**
  * Set site title.
  */
 app.locals.siteTitle = 'Ecommerce';
@@ -48,6 +54,16 @@ app.use(express.static('public'));
  * Add routes.
  */
 app.use(require('./routers/pages'));
+/**
+ * Cache
+ */
+/*app.use(function (req, res, next) {
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  // -1 setting up request as expired and re-requesting before display again. 
+  res.header('Expires', '-1');
+  res.header('Pragma', 'no-cache');
+  next();
+});*/
 /**
  * Create server.
  */
