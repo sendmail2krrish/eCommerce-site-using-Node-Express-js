@@ -8,3 +8,17 @@
 6. Update cart - Done
 7. Remove from cart - Done
 8. Checkout page - Working...
+
+# Screenshots
+
+Products list page
+![alt ProductsPage](https://sendmail2krrish.github.io/eCommerce-site-using-Node-Express-js/Screenshots/pic1.png)
+
+Product details page
+![alt ProductDetails](https://sendmail2krrish.github.io/eCommerce-site-using-Node-Express-js/Screenshots/pic2.png)
+
+Cart page
+![alt Cart](https://sendmail2krrish.github.io/eCommerce-site-using-Node-Express-js/Screenshots/pic3.png)
+
+Checkout page
+![alt Checkout](https://sendmail2krrish.github.io/eCommerce-site-using-Node-Express-js/Screenshots/pic4.png)
