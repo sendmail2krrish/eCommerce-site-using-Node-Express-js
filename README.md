@@ -1,4 +1,5 @@
 # eCommerce site using Node Express js & Mysql (SQL file included)
+This is a basic eCommrece website.
 
 1. Bootstrap 4 design - Done
 2. Product listing - Done
