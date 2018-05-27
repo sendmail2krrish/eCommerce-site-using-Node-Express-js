@@ -1,4 +1,4 @@
-# eCommerce site using Node Express js
+# eCommerce site using Node Express js & Mysql (SQL file included)
 
 1. Bootstrap 4 design - Done
 2. Product listing - Done
