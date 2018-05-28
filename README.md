@@ -23,3 +23,8 @@ Cart page
 
 Checkout page
 ![alt Checkout](https://sendmail2krrish.github.io/eCommerce-site-using-Node-Express-js/Screenshots/pic4.png)
+
+
+Thanks
+Krishna
+sendmail2krrish@gmail.com
